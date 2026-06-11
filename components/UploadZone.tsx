@@ -17,28 +17,49 @@ export default function UploadZone() {
   };
 
   const handleUpload = async () => {
-    if (!file) {
-      alert("Please select a file first");
-      return;
-    }
+    if (!file) return;
 
-    const { error } = await supabase
-      .from("audits")
-      .insert([
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch(
+        "http://127.0.0.1:8000/analyze",
         {
-          image_url: file.name,
-          deception_score: 0,
-          risk_level: "Pending",
-        },
-      ]);
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    if (error) {
-      console.error(error);
-      alert(error.message);
-      return;
+      const data = await response.json();
+
+      alert(
+  `Text: ${data.extracted_text}
+
+Score: ${data.deception_score}
+
+Risk: ${data.risk_level}
+
+Patterns: ${data.patterns.join(", ")}`
+);
+
+     const { error } = await supabase
+  .from("audits")
+  .insert([
+    {
+      image_url: file.name,
+      deception_score: data.deception_score,
+      risk_level: data.risk_level,
+    },
+  ]);
+
+      if (error) {
+        console.error(error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed");
     }
-
-    alert("Audit created successfully");
   };
 
   return (
@@ -66,14 +87,17 @@ export default function UploadZone() {
       )}
 
       {preview && file?.type.startsWith("video") && (
-        <video controls className="mt-4 max-h-64 mx-auto rounded">
+        <video
+          controls
+          className="mt-4 max-h-64 mx-auto rounded"
+        >
           <source src={preview} />
         </video>
       )}
 
       <button
         onClick={handleUpload}
-         disabled={!file}
+        disabled={!file}
         className="mt-4 border px-4 py-2 rounded"
       >
         Upload
