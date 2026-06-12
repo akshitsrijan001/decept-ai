@@ -1,15 +1,20 @@
+import { ShieldCheck } from "lucide-react";
+
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-between border-b px-6 py-4">
-      <h1 className="text-xl font-bold">
-        DeceptAI
-      </h1>
+    <nav className="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-8">
 
-      <div className="flex gap-6">
-        <a href="/">Home</a>
-        <a href="/dashboard">Dashboard</a>
-        <a href="/upload">Upload</a>
+      <div className="flex items-center gap-3">
+        <ShieldCheck className="text-cyan-400" size={28} />
+        <h1 className="text-cyan-400 text-2xl font-bold">
+          DeceptAI
+        </h1>
       </div>
+
+      <div className="text-slate-400 text-sm">
+        AI Dark Pattern Auditor
+      </div>
+
     </nav>
   );
 }

@@ -6,8 +6,11 @@ import { supabase } from "@/lib/supabase";
 export default function UploadZone() {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (!e.target.files?.length) return;
 
     const selectedFile = e.target.files[0];
@@ -16,65 +19,96 @@ export default function UploadZone() {
     setPreview(URL.createObjectURL(selectedFile));
   };
 
-  const handleUpload = async () => {
-    if (!file) return;
+ const handleUpload = async () => {
+  if (!file) return;
 
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
+  setAnalyzing(true);
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/analyze",
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(
+      "http://127.0.0.1:8000/analyze",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    const filePath = `${Date.now()}-${file.name}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("evidence")
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error(uploadError);
+      alert("Storage upload failed");
+      setAnalyzing(false);
+      return;
+    }
+
+    const { data: publicData } = supabase.storage
+      .from("evidence")
+      .getPublicUrl(filePath);
+
+    const imageUrl = publicData.publicUrl;
+
+    const { error } = await supabase
+      .from("audits")
+      .insert([
         {
-          method: "POST",
-          body: formData,
-        }
-      );
+          image_url: imageUrl,
+          deception_score: data.deception_score,
+          risk_level: data.risk_level,
+        },
+      ]);
 
-      const data = await response.json();
+    if (error) {
+      console.error(error);
+      alert(error.message);
+      setAnalyzing(false);
+      return;
+    }
 
-      alert(
-  `Text: ${data.extracted_text}
-
-Score: ${data.deception_score}
+    alert(
+      `Score: ${data.deception_score}
 
 Risk: ${data.risk_level}
 
 Patterns: ${data.patterns.join(", ")}`
-);
+    );
+  } catch (error) {
+    console.error(error);
+    alert("Analysis failed");
+  }
 
-     const { error } = await supabase
-  .from("audits")
-  .insert([
-    {
-      image_url: file.name,
-      deception_score: data.deception_score,
-      risk_level: data.risk_level,
-    },
-  ]);
+  setAnalyzing(false);
+};
 
-      if (error) {
-        console.error(error);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Upload failed");
-    }
-  };
+return (
+  <div className="text-center">
+    <div className="border-2 border-dashed border-slate-700 rounded-2xl p-10 bg-slate-950">
 
-  return (
-    <div className="border-2 border-dashed rounded-lg p-8 text-center">
       <input
         type="file"
         accept="image/*,video/*"
         onChange={handleChange}
-        className="mb-4"
+        className="mb-6 text-slate-300"
       />
 
       {file && (
-        <div className="mt-4">
-          <p className="font-semibold">{file.name}</p>
-          <p>{(file.size / 1024).toFixed(2)} KB</p>
+        <div className="mb-6">
+          <p className="font-semibold text-white">
+            {file.name}
+          </p>
+
+          <p className="text-slate-400">
+            {(file.size / 1024).toFixed(2)} KB
+          </p>
         </div>
       )}
 
@@ -82,14 +116,14 @@ Patterns: ${data.patterns.join(", ")}`
         <img
           src={preview}
           alt="Preview"
-          className="mt-4 max-h-64 mx-auto rounded"
+          className="max-h-80 mx-auto rounded-xl border border-slate-700 mb-6"
         />
       )}
 
       {preview && file?.type.startsWith("video") && (
         <video
           controls
-          className="mt-4 max-h-64 mx-auto rounded"
+          className="max-h-80 mx-auto rounded-xl border border-slate-700 mb-6"
         >
           <source src={preview} />
         </video>
@@ -97,11 +131,13 @@ Patterns: ${data.patterns.join(", ")}`
 
       <button
         onClick={handleUpload}
-        disabled={!file}
-        className="mt-4 border px-4 py-2 rounded"
+        disabled={!file || analyzing}
+        className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-6 py-3 rounded-xl transition disabled:opacity-50"
       >
-        Upload
+        {analyzing ? "Analyzing..." : "Analyze Evidence"}
       </button>
+
     </div>
-  );
+  </div>
+);
 }
