@@ -131,6 +131,59 @@ backend/
 
 ---
 
+## Screenshots
+
+### Dashboard
+
+* Audit statistics overview
+* Risk distribution chart
+* Evidence audit cards
+
+### Upload Evidence
+
+* Screenshot upload
+* OCR extraction
+* Dark pattern analysis
+* Risk scoring
+
+### Violations Page
+
+* Medium-risk findings
+* High-risk findings
+* Evidence review interface
+
+---
+
+## Example Detection
+
+Input Text:
+
+ONLY 2 LEFT
+
+LIMITED OFFER
+
+ACT NOW
+
+Detection Output:
+
+Score: 70
+
+Risk: High
+
+Patterns Detected:
+
+* Scarcity
+* Urgency
+
+---
+
+## Motivation
+
+Dark patterns are deceptive user interface techniques designed to manipulate user behavior. DeceptAI aims to provide an automated auditing system capable of identifying such practices from screenshots, advertisements, and digital interfaces.
+
+The goal is to help improve transparency, user trust, and ethical design practices.
+
+
 ## Future Improvements
 
 * Advanced scoring algorithms
