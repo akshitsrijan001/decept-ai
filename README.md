@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # AI-Driven Dark Pattern Auditor
 
 An AI-powered Regulatory Technology (RegTech) platform that automatically detects deceptive UI/UX dark patterns from screenshots and user flows.
@@ -79,12 +79,12 @@ Store Audit Record
 Dashboard & Violations Review
 
 ---
->>>>>>> f32eae677342698a19a023e4f7319c29f4cec20e
+
 
 ## Tech Stack
 
 ### Frontend
-<<<<<<< HEAD
+
 - Next.js
 - React
 - Tailwind CSS
@@ -114,7 +114,7 @@ Dashboard & Violations Review
 ## Project Status
 
 Day 1 Completed
-=======
+
 
 * Next.js
 * React
@@ -238,4 +238,4 @@ The goal is to help improve transparency, user trust, and ethical design practic
 **Srijan Akshit**
 
 Developed as an AI-assisted dark pattern auditing platform for detecting deceptive UX practices and improving digital transparency.
->>>>>>> f32eae677342698a19a023e4f7319c29f4cec20e
+
