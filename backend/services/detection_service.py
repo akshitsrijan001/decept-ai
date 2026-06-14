@@ -1,3 +1,5 @@
+from ast import keyword
+from email.mime import text
 from difflib import SequenceMatcher
 DARK_PATTERNS = {
 
@@ -47,7 +49,32 @@ DARK_PATTERNS = {
     "viewing this now",
     "popular choice",
     "best seller",
-    "trending now"
+    "trending now",
+    "most popular",
+    "top rated",
+    "high demand",
+    "customer favorite",
+    "frequently bought",
+    "recommended by users",
+    "join thousands",
+    "trusted by",
+    "millions of users",
+    "used by thousands",
+    "most popular",
+    "trusted by thousands",
+    "join thousands of users",
+    "used by millions",
+    "customer favorite",
+    "most viewed",
+    "top choice",
+    "recommended product",
+    "customers love",
+    "people are buying",
+    "popular right now",
+    "highly rated",
+    "five star choice",
+    "market leader",
+    "top pick",
     ],
 
     "subscription_trap": [
@@ -86,35 +113,50 @@ PATTERN_EXPLANATIONS = {
 
 }
 OCR_CORRECTIONS = {
-
     "noh": "now",
     "nov": "now",
+    "nowl": "now",
     "lirnited": "limited",
+    "limitedd": "limited",
     "offcr": "offer",
+    "offef": "offer",
+    "ofter": "offer",
     "tirne": "time",
     "anytirne": "anytime",
     "rnembership": "membership",
-
+    "buv": "buy",
+    "clairn": "claim",
+    "hurrv": "hurry",
+    "todav": "today",
+    "triai": "trial",
+    "cancei": "cancel",
+    "peopie": "people",
+    "custorners": "customers",
+    "thousancls": "thousands",
+    "popuiar": "popular",
+    "seiler": "seller",
 }
 KNOWN_PHRASES = [
-
     "only",
     "limited",
     "offer",
     "act",
     "now",
-
     "buy",
     "claim",
-
     "free",
     "trial",
-
     "membership",
-
+    "subscription",
     "cancel",
     "anytime",
-
+    "seller",
+    "popular",
+    "people",
+    "customers",
+    "hurry",
+    "today",
+    "expires",
 ]
 def fuzzy_correct_word(word):
 
@@ -164,6 +206,8 @@ def analyze_text(text):
     print("OCR TEXT:", text)
 
     text = correct_ocr_text(text)
+    print("FINAL OCR TEXT:")
+    print(repr(text))
     print("CORRECTED OCR:", text)
 
     detected = []
@@ -203,6 +247,16 @@ def analyze_text(text):
         "best seller": 15,
         "trending now": 15,
         "people bought": 15,
+        "most popular": 15,
+        "top rated": 15,
+        "high demand": 15,
+        "customer favorite": 15,
+        "frequently bought": 15,
+        "recommended by users": 15,
+        "join thousands": 20,
+        "trusted by": 20,
+        "millions of users": 20,
+        "used by thousands": 20,
 
         # Subscription Trap
         "free trial": 20,
@@ -216,11 +270,20 @@ def analyze_text(text):
         "i'll pay full price": 20,
         "pay full price": 15,
         "continue without savings": 20,
+        "no i prefer paying more": 20,
+        "i hate saving money": 20,
+        "skip savings": 15,
+        "continue without discount": 20,
+        "continue without offer": 20,
+        "i don't want discounts": 20,
+        "leave savings behind": 20,
     }
 
     for category, keywords in DARK_PATTERNS.items():
 
         for keyword in keywords:
+            print("CHECK:", keyword)
+            print("COUNT:", text.count(keyword))
 
             count = text.count(keyword)
 
@@ -255,7 +318,12 @@ def analyze_text(text):
     else:
         risk = "High"
 
-    confidence = min(score, 100)
+    pattern_count = len(detected)
+
+    confidence = min(
+    40 + (pattern_count * 15) + (score // 4),
+    100
+)
 
     print("PATTERNS:", detected)
     print("MATCHES:", matches)
