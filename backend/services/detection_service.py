@@ -3,92 +3,161 @@ from email.mime import text
 from difflib import SequenceMatcher
 DARK_PATTERNS = {
 
-    "scarcity": [
-        "only",
-        "few remaining",
-        "limited stock",
-        "almost gone",
-        "selling fast",
-        "last chance",
-        "hurry before sold out"
-    ],
+    "scarcity": {
+        "only": 10,
+        "only 1 left": 20,
+        "only 2 left": 18,
+        "only 3 left": 16,
+        "few left": 15,
+        "running out": 15,
+        "low stock": 15,
+        "almost sold out": 20,
+        "selling quickly": 15,
+        "selling out fast": 18,
+        "limited quantity": 18,
+    },
 
-    "urgency": [
-        "limited offer",
-        "offer ends",
-        "expires",
-        "expires today",
-        "expires soon",
-        "today only",
-        "ending soon",
-        "hurry"
-    ],
+    "urgency": {
+        "limited offer": 15,
+        "offer expires": 15,
+        "expires": 12,
+        "expires today": 20,
+        "expires soon": 15,
+        "today only": 15,
+        "ending soon": 15,
+        "hurry": 10,
+        "sale ends tonight": 20,
+        "countdown": 18,
+        "last day": 18,
+        "offer ending": 15,
+        "time running out": 20,
+    },
 
-    "pressure": [
-        "buy now",
-        "act now",
-        "claim now",
-        "don't miss",
-        "instant access",
-        "get it now"
-    ],
+    "pressure": {
+        "buy now": 15,
+        "act now": 15,
+        "claim now": 15,
+        "don't miss": 15,
+        "instant access": 10,
+        "get it now": 15,
+        "shop now": 15,
+        "don't wait": 15,
+        "start now": 12,
+        "join now": 12,
+        "unlock now": 12,
+        "get started": 10,
+    },
 
-    "confirmshaming": [
-    "no thanks",
-    "thanks",
-    "i don't want to save",
-    "i don't like discounts",
-    "i'll pay full price",
-    "pay full price",
-    "continue without savings"
-    ],
+    "confirmshaming": {
+        "no thanks": 10,
+        "thanks": 5,
+        "i don't want to save": 20,
+        "i don't like discounts": 20,
+        "i'll pay full price": 20,
+        "pay full price": 15,
+        "continue without savings": 20,
+        "continue without discount": 20,
+        "continue without offer": 20,
+        "skip savings": 15,
+    },
 
-    "social_proof": [
-    "people bought",
-    "customers purchased",
-    "viewing this now",
-    "popular choice",
-    "best seller",
-    "trending now",
-    "most popular",
-    "top rated",
-    "high demand",
-    "customer favorite",
-    "frequently bought",
-    "recommended by users",
-    "join thousands",
-    "trusted by",
-    "millions of users",
-    "used by thousands",
-    "most popular",
-    "trusted by thousands",
-    "join thousands of users",
-    "used by millions",
-    "customer favorite",
-    "most viewed",
-    "top choice",
-    "recommended product",
-    "customers love",
-    "people are buying",
-    "popular right now",
-    "highly rated",
-    "five star choice",
-    "market leader",
-    "top pick",
-    ],
+    "social_proof": {
+    "people bought": 15,
+    "customers purchased": 15,
+    "viewing this now": 15,
+    "popular choice": 15,
+    "best seller": 18,
+    "trending now": 15,
+    "most popular": 18,
+    "top rated": 15,
+    "high demand": 15,
+    "customer favorite": 15,
+    "frequently bought": 15,
+    "recommended by users": 15,
+    "join thousands": 20,
+    "trusted by": 20,
+    "millions of users": 20,
+    "used by thousands": 20,
+    "trusted by thousands": 25,
+    "join thousands of users": 25,
+    "used by millions": 25,
+    "customers love": 15,
+    "market leader": 15,
+    },
 
-    "subscription_trap": [
-    "free trial",
-    "cancel anytime",
-    "start free trial",
-    "auto renew",
-    "subscription required",
-    "continue membership"
-    ],
+    "subscription_trap": {
+    "free trial": 15,
+    "start free trial": 20,
+    "cancel anytime": 15,
+    "auto renew": 20,
+    "subscription required": 20,
+    "continue membership": 20,
+    "automatically renewed": 20,
+    },
 
+    "fomo": {
+    "don't miss out": 20,
+    "everyone is buying": 20,
+    "be part of": 10,
+    "last opportunity": 20,
+    "exclusive access": 15,
+    "missing out": 15,
+    "join thousands today": 20,
+    "limited seats": 20,
+    "popular right now": 15,
+    },
+
+    "authority_bias": {
+    "expert recommended": 15,
+    "doctor approved": 20,
+    "recommended by experts": 15,
+    "used by professionals": 15,
+    "industry leader": 15,
+    "trusted experts": 15,
+    "official recommendation": 15,
+    "professional choice": 15,
+    "scientifically proven": 20,
+    "certified solution": 15,
+    },
+
+    "emotional_manipulation": {
+    "you will regret it": 25,
+    "don't be left out": 20,
+    "why wait": 10,
+    "your family deserves": 20,
+    "protect your loved ones": 25,
+    "act before it's too late": 25,
+    "avoid disappointment": 20,
+    "don't miss this chance": 20,
+    "make the smart choice": 10,
+    },
+
+    "default_opt_in": {
+    "preselected":20,
+    "automatically selected":25,
+    "default option":15,
+    "automatically renewed":30,
+    "included by default":20,
+    "opt out":15,
+    "automatic enrollment":30,
+    "auto selected":20
+    },
+
+    "hidden_costs": {
+    "additional fees apply": 25,
+    "service charge": 20,
+    "processing fee": 20,
+    "handling fee": 20,
+    "convenience fee": 20,
+    "extra charges": 20,
+    "taxes not included": 25,
+    "fees may apply": 20,
+    "charges apply": 20,
+    }
 }
 
-    
+
+
 
 
 PATTERN_EXPLANATIONS = {
@@ -109,7 +178,22 @@ PATTERN_EXPLANATIONS = {
         "Influences decisions using popularity or crowd behaviour.",
 
     "subscription_trap":
-        "Encourages signups that may lead to recurring charges."
+        "Encourages signups that may lead to recurring charges.",
+
+    "fomo":
+        "Creates fear of missing out to influence user decisions.",
+
+    "authority_bias":
+        "Uses authority figures or expertise to influence choices.",
+
+    "emotional_manipulation":
+        "Uses emotional triggers to pressure decisions.",
+
+    "default_opt_in":
+        "Preselects choices that may benefit the provider.",
+
+    "hidden_costs":
+        "Conceals or delays disclosure of extra charges.",
 
 }
 OCR_CORRECTIONS = {
@@ -214,6 +298,20 @@ def analyze_text(text):
     score = 0
     matches = {}
 
+    CATEGORY_WEIGHTS = {
+        "scarcity": 15,
+        "urgency": 15,
+        "pressure": 10,
+        "social_proof": 10,
+        "confirmshaming": 20,
+        "subscription_trap": 20,
+        "fomo": 15,
+        "authority_bias": 10,
+        "emotional_manipulation": 15,
+        "default_opt_in": 20,
+        "hidden_costs": 20,
+}
+
     PHRASE_WEIGHTS = {
 
         # Scarcity
@@ -224,6 +322,17 @@ def analyze_text(text):
         "selling fast": 15,
         "last chance": 20,
         "hurry before sold out": 25,
+        "only": 10,
+        "only 1 left": 20,
+        "only 2 left": 18,
+        "only 3 left": 16,
+        "few left": 15,
+        "running out": 15,
+        "low stock": 15,
+        "almost sold out": 20,
+        "selling quickly": 15,
+        "selling out fast": 18,
+        "limited quantity": 18,
 
         # Urgency
         "limited offer": 20,
@@ -234,6 +343,19 @@ def analyze_text(text):
         "today only": 20,
         "ending soon": 20,
         "hurry": 15,
+        "limited offer": 15,
+        "offer expires": 15,
+        "expires": 12,
+        "expires today": 20,
+        "expires soon": 15,
+        "today only": 15,
+        "ending soon": 15,
+        "hurry": 10,
+        "sale ends tonight": 20,
+        "countdown": 18,
+        "last day": 18,
+        "offer ending": 15,
+        "time running out": 20,
 
         # Pressure
         "buy now": 15,
@@ -242,6 +364,18 @@ def analyze_text(text):
         "don't miss": 20,
         "instant access": 10,
         "get it now": 15,
+        "buy now": 15,
+        "act now": 15,
+        "claim now": 15,
+        "don't miss": 15,
+        "instant access": 10,
+        "get it now": 15,
+        "shop now": 15,
+        "don't wait": 15,
+        "start now": 12,
+        "join now": 12,
+        "unlock now": 12,
+        "get started": 10,
 
         # Social Proof
         "best seller": 15,
@@ -257,7 +391,15 @@ def analyze_text(text):
         "trusted by": 20,
         "millions of users": 20,
         "used by thousands": 20,
-
+        "people bought": 15,
+        "customers purchased": 15,
+        "viewing this now": 15,
+        "popular choice": 15,
+        "trusted by thousands": 25,
+        "used by millions": 25,
+        "customers love": 15,
+        "market leader": 15,
+        
         # Subscription Trap
         "free trial": 20,
         "start free trial": 25,
@@ -277,6 +419,7 @@ def analyze_text(text):
         "continue without offer": 20,
         "i don't want discounts": 20,
         "leave savings behind": 20,
+        
     }
 
     for category, keywords in DARK_PATTERNS.items():
@@ -293,6 +436,7 @@ def analyze_text(text):
 
                 score += (
                     PHRASE_WEIGHTS.get(keyword, 10)
+                    + CATEGORY_WEIGHTS.get(category, 10)
                     * count
                 )
 
@@ -302,18 +446,41 @@ def analyze_text(text):
                 matches[category].append(keyword)
 
     detected = list(set(detected))
+    # Synergy bonuses
 
-    if len(detected) >= 3:
+    if "scarcity" in detected and "urgency" in detected:
+        score += 5
+
+    if (
+        "scarcity" in detected
+        and "urgency" in detected
+        and "pressure" in detected
+    ):
+        score += 8
+
+    if (
+        "subscription_trap" in detected
+        and "confirmshaming" in detected
+    ):
+        score += 20
+
+    if (
+        "social_proof" in detected
+        and "fomo" in detected
+    ):
         score += 15
 
-    elif len(detected) == 2:
-        score += 10
+        if len(detected) >= 3:
+            score += 8
+
+        elif len(detected) == 2:
+            score += 5
 
     score = min(score, 100)
 
     if score < 40:
         risk = "Low"
-    elif score < 70:
+    elif score < 75:
         risk = "Medium"
     else:
         risk = "High"
@@ -321,7 +488,9 @@ def analyze_text(text):
     pattern_count = len(detected)
 
     confidence = min(
-    40 + (pattern_count * 15) + (score // 4),
+    50
+    + (pattern_count * 10)
+    + (score // 5),
     100
 )
 
