@@ -1,125 +1,107 @@
+# DeceptAI
 
-# AI-Driven Dark Pattern Auditor
+## AI-Powered Dark Pattern Auditor
 
-An AI-powered Regulatory Technology (RegTech) platform that automatically detects deceptive UI/UX dark patterns from screenshots and user flows.
-=======
- # DeceptAI
+DeceptAI is an AI-powered Regulatory Technology (RegTech) platform that automatically detects deceptive UI/UX dark patterns from screenshots, advertisements, landing pages, and digital interfaces.
 
-DeceptAI is an AI-powered dark pattern auditing platform that helps identify deceptive UI and marketing practices from screenshots and digital evidence.
+The platform uses OCR-based text extraction, rule-based dark pattern detection, risk scoring, confidence analysis, dashboard analytics, and PDF report generation to help identify manipulative design practices and improve digital transparency.
 
-Users can upload screenshots, advertisements, landing pages, or interface captures. The system extracts text using OCR, detects dark pattern indicators, assigns a deception score, classifies risk levels, and stores audit records for review.
+---
 
 ## Features
 
 ### OCR-Based Text Extraction
 
-Extracts visible text from uploaded screenshots and UI captures.
+Extracts visible text from uploaded screenshots and interface captures using OCR.
 
 ### Dark Pattern Detection
 
-Identifies common deceptive patterns such as:
+Detects deceptive patterns such as:
 
 * Scarcity ("Only 2 left")
 * Urgency ("Limited offer")
 * Pressure ("Act now")
+* Social Proof ("Trusted by thousands")
+* Subscription Traps
+* Confirmshaming
 
 ### Risk Scoring Engine
 
-Generates a deception score and classifies evidence as:
+Calculates a deception score and classifies evidence into:
 
 * Low Risk
 * Medium Risk
 * High Risk
 
-### Audit Dashboard
+### Confidence Scoring
+
+Generates confidence percentages indicating detection reliability.
+
+### Dashboard Analytics
 
 Provides:
 
 * Total audits
-* Risk distribution statistics
-* Visual analytics
-* Evidence history
+* Average confidence score
+* Highest detected score
+* Risk distribution
+* Dark pattern distribution
+* Audit history
 
 ### Violations Management
 
-Displays medium-risk and high-risk findings for easier investigation.
+Displays medium-risk and high-risk findings for investigation and review.
+
+### PDF Report Export
+
+Generates downloadable audit reports containing:
+
+* Risk assessment summary
+* Confidence score
+* Pattern explanations
+* OCR extracted evidence
 
 ### Evidence Storage
 
-Stores uploaded evidence and audit records using Supabase.
+Stores uploaded screenshots and audit records using Supabase Database and Storage.
 
 ---
 
 ## System Workflow
 
+```text
 Upload Evidence
-
-↓
-
+        ↓
 OCR Text Extraction
-
-↓
-
+        ↓
 Dark Pattern Detection
-
-↓
-
+        ↓
 Deception Score Calculation
-
-↓
-
+        ↓
+Confidence Assessment
+        ↓
 Risk Classification
-
-↓
-
+        ↓
 Store Audit Record
-
-↓
-
-Dashboard & Violations Review
+        ↓
+Dashboard Analytics
+        ↓
+Violations Review
+        ↓
+PDF Report Export
+```
 
 ---
-
 
 ## Tech Stack
 
 ### Frontend
 
-- Next.js
-- React
-- Tailwind CSS
-- Shadcn UI
-
-### Backend
-- FastAPI
-
-### AI Stack
-- PyTorch
-- OpenCV
-- EasyOCR
-- Transformers
-
-### Database
-- Supabase
-
-## Planned Features
-
-- Screenshot Upload
-- OCR Extraction
-- Dark Pattern Detection
-- Compliance Reports
-- Risk Scoring
-- Annotated Screenshots
-
-## Project Status
-
-Day 1 Completed
-
-
 * Next.js
 * React
 * TypeScript
 * Tailwind CSS
+* Shadcn UI
 
 ### Backend
 
@@ -133,26 +115,29 @@ Day 1 Completed
 
 ### OCR & Detection
 
-* OCR Processing
-* Rule-Based Dark Pattern Detection Engine
+* EasyOCR
+* OpenCV
+* Rule-Based Detection Engine
 
 ---
 
 ## Project Structure
 
+```text
 frontend/
 ├── app/
-│ ├── dashboard/
-│ ├── upload/
-│ └── violations/
+│   ├── dashboard/
+│   ├── upload/
+│   └── violations/
 ├── components/
 ├── lib/
 
 backend/
 ├── services/
-│ ├── ocr_service.py
-│ └── detection_service.py
+│   ├── ocr_service.py
+│   └── detection_service.py
 ├── main.py
+```
 
 ---
 
@@ -160,104 +145,146 @@ backend/
 
 * Screenshot analysis
 * OCR text extraction
-* Dark pattern keyword detection
+* Dark pattern detection
 * Risk scoring
+* Confidence scoring
 * Audit storage
 * Dashboard analytics
 * Violations tracking
+* PDF report generation
 
 ---
 
-## Screenshots
+# Screenshots
 
-### Dashboard
+## Dashboard
+
+Features:
 
 * Audit statistics overview
+* Average confidence tracking
 * Risk distribution chart
+* Dark pattern distribution chart
 * Evidence audit cards
-* <img width="945" height="441" alt="image" src="https://github.com/user-attachments/assets/2dd439ef-1b39-4412-b32d-1f4d1712a5fa" />
-                           "Analytics dashboard with dark pattern statistics"
 
+<img width="945" height="441" alt="Dashboard" src="https://github.com/user-attachments/assets/2dd439ef-1b39-4412-b32d-1f4d1712a5fa" />
 
-### Upload Evidence
+---
+
+## Upload Evidence
+
+Features:
 
 * Screenshot upload
 * OCR extraction
-* <img width="949" height="180" alt="image" src="https://github.com/user-attachments/assets/fdc838ab-33d1-45f7-9cd9-3ebcc65ae11e" />
-                           "Evidence upload and OCR analysis interface"
-
 * Dark pattern analysis
 * Risk scoring
 
-### Violations Page
+<img width="949" height="180" alt="Upload Evidence" src="https://github.com/user-attachments/assets/fdc838ab-33d1-45f7-9cd9-3ebcc65ae11e" />
+
+---
+
+## Violations Page
+
+Features:
 
 * Medium-risk findings
 * High-risk findings
 * Evidence review interface
-<img width="949" height="442" alt="image" src="https://github.com/user-attachments/assets/6af6af60-277a-49fe-8ae4-415bfa19dea7" />
-                         "Violation review and risk assessment page"
+* OCR evidence display
 
-### Audit Detail View
+<img width="949" height="442" alt="Violations Page" src="https://github.com/user-attachments/assets/6af6af60-277a-49fe-8ae4-415bfa19dea7" />
+
+---
+
+## Audit Detail View
+
+Features:
 
 * OCR evidence inspection
 * Confidence scoring
-  
-  
+* Risk classification
+* Pattern review
+* Report export functionality
 
+<img width="436" height="326" alt="Audit Detail View" src="https://github.com/user-attachments/assets/da4685d4-9c33-4c57-bf96-31bd64d5afde" />
 
-### PDF Export Report
+---
+
+## PDF Export Report
+
+Features:
 
 * Automated report generation
 * Risk assessment summary
+* Confidence scoring
 * Pattern explanations
+* OCR evidence summary
 
-
-  <img width="335" height="391" alt="image" src="https://github.com/user-attachments/assets/6ac3c8ef-37fd-404e-b933-19ddd6dbcad9" />
-                            "Detailed audit report with PDF export"
-
-
+<img width="650" alt="PDF Report" src="https://github.com/user-attachments/assets/6ac3c8ef-37fd-404e-b933-19ddd6dbcad9" />
 
 ---
 
 ## Example Detection
 
-Input Text:
+### Input Text
 
+```text
 ONLY 2 LEFT
 
 LIMITED OFFER
 
 ACT NOW
+```
 
-Detection Output:
+### Detection Output
 
+```text
 Score: 70
-
 Risk: High
 
 Patterns Detected:
-
-* Scarcity
-* Urgency
+- Scarcity
+- Urgency
+```
 
 ---
 
 ## Motivation
 
-Dark patterns are deceptive user interface techniques designed to manipulate user behavior. DeceptAI aims to provide an automated auditing system capable of identifying such practices from screenshots, advertisements, and digital interfaces.
+Dark patterns are deceptive user interface techniques designed to manipulate user behavior and influence user decisions.
 
-The goal is to help improve transparency, user trust, and ethical design practices.
+DeceptAI aims to provide an automated auditing platform capable of identifying such practices from screenshots, advertisements, and digital interfaces. The goal is to improve transparency, user trust, and ethical design practices through AI-assisted compliance analysis.
 
+---
 
 ## Future Improvements
 
-* Advanced scoring algorithms
 * Machine learning based detection
-* Pattern explanations
-* PDF audit reports
-* Authentication and user accounts
+* Advanced scoring algorithms
+* Pattern explanation engine
+* User authentication
 * Cloud deployment
 * Real-time monitoring
+* Compliance benchmarking
+* Browser extension integration
+
+---
+
+## Project Status
+
+### DeceptAI v1.0
+
+Completed Features:
+
+* OCR text extraction
+* Dark pattern detection
+* Risk scoring
+* Confidence scoring
+* Dashboard analytics
+* Violations management
+* PDF export reports
+* Supabase integration
 
 ---
 
@@ -265,5 +292,4 @@ The goal is to help improve transparency, user trust, and ethical design practic
 
 **Srijan Akshit**
 
-Developed as an AI-assisted dark pattern auditing platform for detecting deceptive UX practices and improving digital transparency.
-
+Developed as an AI-powered dark pattern auditing platform for detecting deceptive UX practices and improving digital transparency.
