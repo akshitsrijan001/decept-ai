@@ -175,11 +175,15 @@ backend/
 * Audit statistics overview
 * Risk distribution chart
 * Evidence audit cards
+* <img width="945" height="441" alt="image" src="https://github.com/user-attachments/assets/2dd439ef-1b39-4412-b32d-1f4d1712a5fa" />
+
 
 ### Upload Evidence
 
 * Screenshot upload
 * OCR extraction
+* <img width="949" height="180" alt="image" src="https://github.com/user-attachments/assets/fdc838ab-33d1-45f7-9cd9-3ebcc65ae11e" />
+
 * Dark pattern analysis
 * Risk scoring
 
@@ -188,6 +192,24 @@ backend/
 * Medium-risk findings
 * High-risk findings
 * Evidence review interface
+<img width="949" height="442" alt="image" src="https://github.com/user-attachments/assets/6af6af60-277a-49fe-8ae4-415bfa19dea7" />
+
+### Audit Detail View
+
+* OCR evidence inspection
+* Confidence scoring
+* PDF report export
+  <img width="500" height="284" alt="Audit Detail" src="https://github.com/user-attachments/assets/9e405c9d-b3c3-43f4-ac10-abff2b438740" />
+
+### PDF Export Report
+
+* Automated report generation
+* Risk assessment summary
+* Pattern explanations
+
+
+" />
+" />
 
 ---
 
