@@ -207,7 +207,10 @@ Features:
 * Pattern review
 * Report export functionality
 
-<img width="166" height="284" alt="image" src="https://github.com/user-attachments/assets/8f553344-4491-4530-b1d2-0f8413a51c8d" />
+<img width="961" height="1637" alt="image" src="https://github.com/user-attachments/assets/eb43154c-a6a9-4467-9a68-723e50809dfb" />
+
+
+
 
 
 ---
@@ -222,7 +225,9 @@ Features:
 * Pattern explanations
 * OCR evidence summary
 
-<img width="650" alt="PDF Report" src="https://github.com/user-attachments/assets/6ac3c8ef-37fd-404e-b933-19ddd6dbcad9" />
+<img width="934" height="832" alt="image" src="https://github.com/user-attachments/assets/6f97c8e0-70cc-4ad1-85ae-5f6eb0f89c4a" />
+
+
 
 ---
 
