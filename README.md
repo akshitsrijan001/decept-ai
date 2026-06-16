@@ -207,7 +207,8 @@ Features:
 * Pattern review
 * Report export functionality
 
-<img width="436" height="326" alt="Audit Detail View" src="https://github.com/user-attachments/assets/da4685d4-9c33-4c57-bf96-31bd64d5afde" />
+<img width="166" height="284" alt="image" src="https://github.com/user-attachments/assets/8f553344-4491-4530-b1d2-0f8413a51c8d" />
+
 
 ---
 
