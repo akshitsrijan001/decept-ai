@@ -37,6 +37,16 @@ Calculates a deception score and classifies evidence into:
 
 Generates confidence percentages indicating detection reliability.
 
+### Trust & Compliance Analysis
+
+Generates additional compliance-focused metrics including:
+
+* Trust Score (0–100)
+* Compliance Grade (A–F)
+* AI-generated audit summaries
+* Regulatory concern mapping
+* Actionable remediation recommendations
+
 ### Dashboard Analytics
 
 Provides:
@@ -145,14 +155,19 @@ backend/
 
 * Screenshot analysis
 * OCR text extraction
+* OCR correction and fuzzy matching
 * Dark pattern detection
 * Risk scoring
 * Confidence scoring
+* Trust score generation
+* Compliance grading
+* AI audit summaries
+* Regulatory mapping
+* Remediation recommendations
 * Audit storage
 * Dashboard analytics
 * Violations tracking
 * PDF report generation
-
 ---
 
 # Screenshots
@@ -201,9 +216,15 @@ Features:
 
 Features:
 
+Features:
+
 * OCR evidence inspection
 * Confidence scoring
-* Risk classification
+* Trust score analysis
+* Compliance grading
+* AI audit summaries
+* Regulatory concern mapping
+* Recommendations engine
 * Pattern review
 * Report export functionality
 
@@ -215,15 +236,19 @@ Features:
 
 ---
 
-## PDF Export Report
+### PDF Report Export
 
-Features:
+Generates downloadable audit reports containing:
 
-* Automated report generation
 * Risk assessment summary
-* Confidence scoring
+* Confidence score
+* Trust score
+* Compliance grade
+* AI audit summary
 * Pattern explanations
-* OCR evidence summary
+* Regulatory concerns
+* Remediation recommendations
+* OCR extracted evidence
 
 <img width="934" height="832" alt="image" src="https://github.com/user-attachments/assets/6f97c8e0-70cc-4ad1-85ae-5f6eb0f89c4a" />
 
@@ -279,7 +304,7 @@ DeceptAI aims to provide an automated auditing platform capable of identifying s
 
 ## Project Status
 
-### DeceptAI v1.0
+### DeceptAI v1.1 MVP
 
 Completed Features:
 
@@ -291,6 +316,15 @@ Completed Features:
 * Violations management
 * PDF export reports
 * Supabase integration
+
+Latest additions:
+
+* Trust scoring system
+* Compliance grading
+* AI-generated audit summaries
+* Regulatory concern mapping
+* Recommendation engine
+* Enhanced PDF reporting
 
 ---
 
