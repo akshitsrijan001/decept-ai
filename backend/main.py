@@ -35,10 +35,27 @@ async def analyze(file: UploadFile = File(...)):
     return {
     "filename": file.filename,
     "extracted_text": extracted_text,
+
     "deception_score": result["score"],
     "risk_level": result["risk"],
+
     "patterns": result["patterns"],
     "matches": result["matches"],
+
     "explanations": result["explanations"],
-    "confidence": result["confidence"]
+
+    "confidence": result["confidence"],
+
+    "trust_score": result["trust_score"],
+    "compliance_grade": result["compliance_grade"],
+
+    "audit_summary": result["audit_summary"],
+
+    "highlights": result["highlights"],
+
+    "recommendations": result["recommendations"],
+
+    "regulations": result["regulations"],
+
+    "severity": result["severity"]
 }

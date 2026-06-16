@@ -196,6 +196,80 @@ PATTERN_EXPLANATIONS = {
         "Conceals or delays disclosure of extra charges.",
 
 }
+
+PATTERN_REGULATIONS = {
+
+    "scarcity":
+        "FTC Deceptive Advertising Guidance",
+
+    "urgency":
+        "FTC Consumer Protection Principles",
+
+    "pressure":
+        "FTC Unfair Practices Guidance",
+
+    "social_proof":
+        "FTC Endorsement Guidelines",
+
+    "confirmshaming":
+        "Consumer Protection Best Practices",
+
+    "subscription_trap":
+        "FTC Negative Option Rule",
+
+    "fomo":
+        "FTC Deceptive Practices Guidance",
+
+    "authority_bias":
+        "FTC Endorsement Guidelines",
+
+    "emotional_manipulation":
+        "Consumer Fairness Principles",
+
+    "default_opt_in":
+        "Consumer Consent Standards",
+
+    "hidden_costs":
+        "Pricing Transparency Requirements"
+}
+
+
+PATTERN_RECOMMENDATIONS = {
+
+    "scarcity":
+        "Avoid artificial scarcity claims unless supported by actual inventory data.",
+
+    "urgency":
+        "Use genuine deadlines and clearly disclose offer expiration criteria.",
+
+    "pressure":
+        "Allow users to make decisions without coercive or aggressive language.",
+
+    "social_proof":
+        "Display accurate popularity metrics supported by evidence.",
+
+    "confirmshaming":
+        "Provide neutral opt-out choices without guilt-inducing wording.",
+
+    "subscription_trap":
+        "Clearly disclose recurring billing and cancellation procedures.",
+
+    "fomo":
+        "Avoid language designed solely to trigger fear of missing out.",
+
+    "authority_bias":
+        "Ensure expert endorsements are genuine and verifiable.",
+
+    "emotional_manipulation":
+        "Avoid exploiting emotional vulnerabilities to influence decisions.",
+
+    "default_opt_in":
+        "Require explicit user consent rather than preselected choices.",
+
+    "hidden_costs":
+        "Disclose all fees and charges transparently before checkout."
+}
+
 OCR_CORRECTIONS = {
     "noh": "now",
     "nov": "now",
@@ -493,19 +567,73 @@ def analyze_text(text):
     + (score // 5),
     100
 )
+    if score < 30:
+        compliance_grade = "A"
+
+    elif score < 50:
+        compliance_grade = "B"
+
+    elif score < 70:
+        compliance_grade = "C"
+
+    elif score < 85:
+        compliance_grade = "D"
+
+    else:
+        compliance_grade = "F"
 
     print("PATTERNS:", detected)
     print("MATCHES:", matches)
     print("SCORE:", score)
+
+    summary = (
+    f"This evidence contains "
+    f"{len(detected)} detected dark pattern categories "
+    f"including {', '.join(detected)}. "
+    f"The overall risk level is {risk} "
+    f"with a deception score of {score}."
+)
+    
+    PATTERN_SEVERITY = {
+
+    "scarcity": "Medium",
+    "urgency": "Medium",
+    "pressure": "High",
+    "social_proof": "Low",
+    "confirmshaming": "High",
+    "subscription_trap": "Critical",
+    "fomo": "Medium",
+    "authority_bias": "Low",
+    "emotional_manipulation": "High",
+    "default_opt_in": "High",
+    "hidden_costs": "Critical"
+}
+    trust_score = max(0, 100 - score)
 
     return {
         "score": score,
         "risk": risk,
         "patterns": detected,
         "matches": matches,
+        "regulations": {
+    pattern: PATTERN_REGULATIONS[pattern]
+    for pattern in detected
+        },
         "explanations": {
             pattern: PATTERN_EXPLANATIONS[pattern]
             for pattern in detected
         },
-        "confidence": confidence
+        "severity": {
+    pattern: PATTERN_SEVERITY[pattern]
+    for pattern in detected
+    },
+        "confidence": confidence,
+        "trust_score": trust_score,
+        "compliance_grade": compliance_grade,
+        "audit_summary": summary,
+        "highlights": matches,
+        "recommendations": [
+    PATTERN_RECOMMENDATIONS[p]
+    for p in detected
+]
     }
